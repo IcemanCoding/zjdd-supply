@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zaijiadd.app.product.dao.ProductInfoDAO">
+
+	<select id="getProductInfo" parameterType="java.lang.String"
+		resultType="productInfoEntity">
+		SELECT
+		t.product_id productId,
+		t.product_name productName,
+		t.amount amount
+		FROM
+		product_info t
+		WHERE
+		t.product_id = #{productId}
+		AND
+		t.status = 1
+	</select>
+	<select id="getProductInfoList" resultType="productInfoEntity">
+		SELECT
+		t.product_id
+		productId,
+		t.product_name productName,
+		t.amount amount
+		FROM
+		product_info t
+	</select>
+	<select id="getProductGoodsList" parameterType="java.lang.String"
+		resultType="productGoodsDto">
+		SELECT
+		t.count count,
+		t.unit_price unitPrice,
+		t.total_amount
+		totalAmount,
+		t.goods_id goodsId,
+		a.goods_name goodsName,
+		b.category_name
+		categoryName,
+		b.category_id categoryId,
+		b.category_code categoryCode
+		FROM
+		product_goods_info t
+		INNER JOIN goods_info a ON t.goods_id =
+		a.goods_id
+		INNER JOIN category_info b ON a.category_id = b.category_id
+		where
+		t.product_id = #{productId}
+		ORDER BY a.category_id,
+		b.category_code
+	</select>
+	<select id="getProductGoodsDetailList" parameterType="java.lang.String"
+		resultType="productGoodsDto">
+		SELECT
+		a.id id,
+		0 category_id,
+		a.goods_name name,
+		a.spec spec,
+		a.pic pic,
+		t.unit_price purchase_price,
+		t.count stock
+		FROM
+		product_goods_info t
+		INNER JOIN goods_info a ON a.goods_id = t.goods_id
+		WHERE
+		t.product_id = #{productId}
+	</select>
+	<select id="getProductgoodsInfoList" parameterType="java.lang.String" resultType="productGoodsDto">
+		SELECT
+		goods_id goodsId,
+		count count
+		FROM
+		product_goods_info
+		WHERE
+		product_id = #{productId}
+	</select>
+
+</mapper>

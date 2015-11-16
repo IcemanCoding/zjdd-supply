@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zaijiadd.app.user.dao.UserReceiveInfoDAO">
+
+	<insert id="insertUserReceiveInfo" parameterType="userReceiveInfoDto">
+		INSERT INTO
+		user_receive_info (
+		user_id,
+		real_name,
+		mobile,
+		post_code,
+		address,
+		create_date,
+		province_id,
+		city_id,
+		county_id,
+		town_id
+		)
+		VALUES
+		(
+		#{userId},
+		#{realName},
+		#{mobile},
+		#{postCode},
+		#{address},
+		now(),
+		#{provinceId},
+		#{cityId},
+		#{countyId},
+		#{townId}
+		)
+	</insert>
+	<select id="getUserReceiveInfo" parameterType="java.lang.String"
+		resultType="userReceiveInfoDto">
+		SELECT
+		real_name realName,
+		mobile mobile,
+		post_code postCode,
+		address address,
+		province_id provinceId,
+		city_id cityId,
+		county_id countyId,
+		town_id townId
+		FROM
+		user_receive_info
+		where user_id = #{userId}
+		ORDER BY update_date DESC
+		limit 1
+	</select>
+
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zaijiadd.app.user.dao.StoreInfoDAO">
+
+	<select id="isStoreInfoExist" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		SELECT
+		count(1)
+		FROM
+		store_info t
+		WHERE
+		t.store_id = #{storeId}
+	</select>
+	<select id="getStoreInfo" parameterType="java.lang.String"
+		resultType="storeInfoDto">
+		SELECT
+		t.store_id storeId,
+		t.store_name storeName,
+		t.store_addr storeAddr
+		FROM
+		store_info t
+		WHERE
+		t.store_id = #{storeId}
+	</select>
+	<insert id="insertStoreInfo" parameterType="java.util.Map">
+		INSERT INTO
+		store_info (store_id, store_name, store_addr, create_date )
+		VALUES(
+		#{storeId}, #{storeName}, #{storeAddr}, now() )
+	</insert>
+
+</mapper>

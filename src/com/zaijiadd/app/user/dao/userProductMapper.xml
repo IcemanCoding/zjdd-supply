@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zaijiadd.app.user.dao.UserProductDAO">
+
+	<insert id="insertUserProduct" parameterType="java.util.Map">
+		insert into
+		user_product ( user_id, product_id, amount, trans_code, count,
+		create_date )
+		values( #{userId}, #{productId}, #{amount}, #{transCode},
+		#{count}, now() )
+	</insert>
+
+</mapper>

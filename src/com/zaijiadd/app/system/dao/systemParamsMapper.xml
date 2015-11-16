@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zaijiadd.app.system.dao.SystemParamsDAO">
+
+	<select id="getSystemParams" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select param_value
+		from system_params
+		where
+		param_key = #{paramKey}
+	</select>
+	<update id="updateSystemParams" parameterType="java.util.Map">
+		update system_params 
+		set param_value = #{paramValue}
+		where 
+		param_key = #{paramKey}
+	</update>
+
+</mapper>
